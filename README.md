@@ -1,4 +1,4 @@
-# Password generator component
+# Inventory test task
 
 ## how to install locally
 
