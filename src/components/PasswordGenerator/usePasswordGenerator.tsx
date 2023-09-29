@@ -1,7 +1,5 @@
 import { useState } from 'react'
 
-import { shuffleString } from './utils'
-
 const CHARACTERS_MAP = {
   lowercase: 'abcdefghijklmnopqrstuvwxyz',
   uppercase: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ',
@@ -54,7 +52,7 @@ const usePasswordGenerator = () => {
         : acc
     }, '')
 
-    setPassword(shuffleString(resultString))
+    setPassword(resultString)
   }
 
   const checkboxError = !Object.values(checkboxesState).some((v) => v)
