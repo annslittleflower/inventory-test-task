@@ -1,7 +1,9 @@
 /*
 	TODO
 
-		try tailwind
+		clsx merge classNames here
+		https://www.youtube.com/watch?v=re2JFITR7TI
+
 		react query only one hook
 		make it work, split to components after
 
@@ -14,6 +16,9 @@
 
 		leave comments if you feel its needed
 
+
+		check if we can test in github action
+
 		deploy
 
 		react-testing-library at the end
@@ -22,9 +27,12 @@
 
 const App = () => {
   return (
-    <div>
+    <div
+      className='text-3xl font-bold underline font-red'
+      data-testid='app'
+    >
       hello
-      <div>awdawd</div>
+      <div>test</div>
     </div>
   )
 }
