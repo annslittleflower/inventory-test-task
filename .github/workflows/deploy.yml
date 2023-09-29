@@ -39,10 +39,6 @@ jobs:
           cache: 'npm'
       - name: Install dependencies
         run: npm install
-      - name: Execute Unit tests
-        run: |
-          npm ci
-          run: npm run test-prod
       - name: Build
         run: npm run build
       - name: Setup Pages

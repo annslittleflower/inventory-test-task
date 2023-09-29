@@ -1,6 +1,12 @@
 /*
 	TODO
 
+
+	- name: Execute Unit tests
+        run: |
+          npm ci
+          run: npm run test-prod
+
 		clsx merge classNames here
 		https://www.youtube.com/watch?v=re2JFITR7TI
 
