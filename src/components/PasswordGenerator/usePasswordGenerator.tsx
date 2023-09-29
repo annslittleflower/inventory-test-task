@@ -1,7 +1,7 @@
 import { useState } from 'react'
 
 const CHARACTERS_MAP = {
-  lowercase: 'abcdefghijklmnopqrstuvwxyz',
+  lowercase: 'abcdefghijklmnopqrstuvwxyzd',
   uppercase: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ',
   numbers: '0123456789',
   symbols: '!@#$%^&*()_+-=:;><',
