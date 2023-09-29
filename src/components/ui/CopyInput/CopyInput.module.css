@@ -1,0 +1,37 @@
+.inputWrapper {
+  position: relative;
+  width: 100%;
+  display: inline-block;
+}
+
+.copyInput {
+  width: 100%;
+  padding-right: 3rem;
+  padding-left: 1rem;
+  height: 4rem;
+  font-size: 1.5rem;
+  border: 1px solid #000;
+  border-radius: 0.3rem;
+}
+
+.copyInput:disabled {
+  background-color: initial;
+  color: initial;
+}
+
+.copyIcon {
+  width: 1.5rem;
+  cursor: pointer;
+  position: absolute;
+  right: 0.5rem;
+  top: 1.2rem;
+}
+
+.copyIcon:hover {
+  box-shadow: 0px 0px 10px 2px rgb(43 106 171 / 50%);
+}
+
+
+.copyIcon:active {
+  box-shadow: 0px 0px 10px 2px rgb(0 55 255 / 30%);
+}

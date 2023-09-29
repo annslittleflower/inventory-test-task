@@ -1,0 +1,10 @@
+html, 
+body {
+  max-width: 75rem;
+  margin: auto;
+  padding: 0 1rem;
+}
+
+* {
+  box-sizing: border-box;
+}
