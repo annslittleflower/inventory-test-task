@@ -7,7 +7,7 @@ describe('App', () => {
   it('smoke test', () => {
     render(<App />)
 
-    const t = screen.getByTestId('appd')
+    const t = screen.getByTestId('app')
 
     expect(t).toBeInTheDocument()
   })
