@@ -20,12 +20,6 @@ const testProducts = [
   },
 ]
 
-// const expectation = nock('https://dummyjson.com')
-//   .get('/products?limit=3')
-//   .reply(200, {
-//     products: testProducts,
-//   })
-
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
