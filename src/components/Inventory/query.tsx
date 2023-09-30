@@ -3,14 +3,12 @@ import { useQuery } from '@tanstack/react-query'
 export type Product = {
   id: number
   title: string
-  category: string
 }
 
 const getProductsDto = (products: []): Product[] => {
-  return products.map(({ id, title, category }) => ({
+  return products.map(({ id, title }) => ({
     id,
     title,
-    category,
   }))
 }
 
@@ -30,7 +28,7 @@ const useProducts = (limit: number = 5) => {
     },
     {
       refetchOnWindowFocus: false,
-      cacheTime: 0, // use it just to get data and have nice interface
+      cacheTime: 0, // use it just to get data
     }
   )
 
