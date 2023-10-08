@@ -1,8 +1,8 @@
 import { ComponentPropsWithRef, useRef, useState } from 'react'
 
-type DialogProps = ComponentPropsWithRef<'dialog'>
+export type DialogProps = ComponentPropsWithRef<'dialog'>
 
-const useDialog = () => {
+export const useDialog = () => {
   const dialogRef = useRef<HTMLDialogElement>(null)
   const [isOpened, setIsOpened] = useState<boolean>(false)
 
@@ -43,5 +43,3 @@ const useDialog = () => {
     Dialog: DialogComp,
   }
 }
-
-export default useDialog

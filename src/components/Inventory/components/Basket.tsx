@@ -1,25 +1,17 @@
 import { memo } from 'react'
 import { Header, ProductRow } from '.'
 import { Button } from '@/components/ui'
-import { Product } from '../hooks/query'
+import { useInventoryContext } from '../hooks/useInventoryContext'
 
-type BasketProps = {
-  deleteProductsFromBasket: () => void
-  toggleBasket: (product: Product) => void
-  productsInBasket: Product[]
-  isRemoveButtonDisabled: boolean
-  isBasketItemSelected: (p: Product) => boolean
-}
-
-const Basket = ({
-  deleteProductsFromBasket,
-  toggleBasket,
-  productsInBasket,
-  isRemoveButtonDisabled,
-  isBasketItemSelected,
-}: BasketProps) => {
+const Basket = () => {
+  const {
+    deleteProductsFromBasket,
+    toggleBasket,
+    productsInBasket,
+    isRemoveButtonDisabled,
+    isBasketItemSelected,
+  } = useInventoryContext()
   console.log('rendered')
-
   console.log('productsInBasket', productsInBasket)
 
   return (

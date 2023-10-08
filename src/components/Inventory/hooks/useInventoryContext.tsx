@@ -1,4 +1,12 @@
-import { useState, useEffect, useMemo, useCallback } from 'react'
+import {
+  useContext,
+  createContext,
+  useState,
+  useEffect,
+  useCallback,
+  useMemo,
+  ReactNode,
+} from 'react'
 import useProducts, { Product } from './query'
 import { getRandomInt } from '@/lib/utils'
 import { Dialog as DialogComp } from '@/components/ui'
@@ -7,7 +15,34 @@ type BasketProducts = {
   [key: Product['id']]: number
 }
 
-const useInventory = () => {
+type InventoryContextType = {
+  isError: boolean
+  isLoading: boolean
+  showDialog: () => void
+  Dialog: (props: DialogComp.DialogProps) => JSX.Element
+
+  addProductsToBasket: () => void
+  toggleSelectedProduct: (product: Product) => void
+  addNewProduct: () => void
+  cancelDialog: () => void
+  totalCount: number
+  products: Product[]
+  selectedProducts: Product[]
+  setNewProduct: React.Dispatch<React.SetStateAction<string>>
+  newProduct: string
+  isProductSelected: (p: Product) => boolean
+  isAddButtonDisabled: boolean
+  deleteProductsFromBasket: () => void
+  toggleBasket: (product: Product) => void
+  productsInBasket: Product[]
+  isRemoveButtonDisabled: boolean
+  isBasketItemSelected: (p: Product) => boolean
+  selectedBasketKeys: Product['id'][]
+}
+
+export const InventoryContext = createContext<InventoryContextType | null>(null)
+
+const InventoryContextProvider = ({ children }: { children: ReactNode }) => {
   const { isError, isLoading, products: productsFromQuery } = useProducts()
 
   const [products, setProducts] = useState<Product[]>([])
@@ -95,29 +130,45 @@ const useInventory = () => {
     [selectedBasketKeys]
   )
 
-  return {
-    isError,
-    isLoading,
-    showDialog,
-    Dialog,
-    addProductsToBasket,
-    deleteProductsFromBasket,
-    toggleSelectedProduct,
-    toggleBasket,
-    addNewProduct,
-    cancelDialog,
-    productsInBasket,
-    totalCount,
-    selectedProducts,
-    selectedBasketKeys,
-    products,
-    newProduct,
-    setNewProduct,
-    isProductSelected,
-    isRemoveButtonDisabled,
-    isAddButtonDisabled,
-    isBasketItemSelected,
-  }
+  return (
+    <InventoryContext.Provider
+      value={{
+        isError,
+        isLoading,
+        showDialog,
+        Dialog,
+        addProductsToBasket,
+        deleteProductsFromBasket,
+        toggleSelectedProduct,
+        toggleBasket,
+        addNewProduct,
+        cancelDialog,
+        productsInBasket,
+        totalCount,
+        selectedProducts,
+        selectedBasketKeys,
+        products,
+        newProduct,
+        setNewProduct,
+        isProductSelected,
+        isRemoveButtonDisabled,
+        isAddButtonDisabled,
+        isBasketItemSelected,
+      }}
+    >
+      {children}
+    </InventoryContext.Provider>
+  )
 }
 
-export default useInventory
+export const useInventoryContext = () => {
+  const context = useContext(InventoryContext)
+
+  if (!context) {
+    throw new Error('Context must be inside a provider')
+  }
+
+  return context
+}
+
+export default InventoryContextProvider

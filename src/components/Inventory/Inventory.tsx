@@ -1,7 +1,6 @@
 import { Button, Input } from '@/components/ui'
-
 import { ProductRow, Header, Basket } from './components'
-import useInventory from './hooks/useInventory'
+import { useInventoryContext } from './hooks/useInventoryContext'
 
 const Inventory = () => {
   const {
@@ -19,12 +18,7 @@ const Inventory = () => {
     newProduct,
     isProductSelected,
     isAddButtonDisabled,
-    deleteProductsFromBasket,
-    toggleBasket,
-    productsInBasket,
-    isRemoveButtonDisabled,
-    isBasketItemSelected,
-  } = useInventory()
+  } = useInventoryContext()
 
   if (isError) return <div>please try again later</div>
 
@@ -69,13 +63,7 @@ const Inventory = () => {
               </ProductRow>
             ))}
           </div>
-          <Basket
-            deleteProductsFromBasket={deleteProductsFromBasket}
-            toggleBasket={toggleBasket}
-            productsInBasket={productsInBasket}
-            isRemoveButtonDisabled={isRemoveButtonDisabled}
-            isBasketItemSelected={isBasketItemSelected}
-          />
+          <Basket />
         </div>
         <div
           data-testid='total'
