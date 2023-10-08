@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useMemo, useCallback } from 'react'
 import useProducts, { Product } from './query'
 import { getRandomInt } from '@/lib/utils'
 import { useDialog } from '@/components/ui'
@@ -38,13 +38,13 @@ const useInventory = () => {
     setSelectedProducts([])
   }
 
-  const deleteProductsFromBasket = () => {
+  const deleteProductsFromBasket = useCallback(() => {
     const tempBP = { ...basketProducts }
 
     selectedBasketKeys.forEach((i) => delete tempBP[i])
     setBasketProducts(tempBP)
     setSelectedBasketKeys([])
-  }
+  }, [basketProducts, selectedBasketKeys])
 
   const toggleSelectedProduct = (product: Product) => {
     setSelectedProducts((prev) =>
@@ -54,13 +54,13 @@ const useInventory = () => {
     )
   }
 
-  const toggleBasket = (product: Product) => {
+  const toggleBasket = useCallback((product: Product) => {
     setSelectedBasketKeys((prev) =>
       prev.includes(product.id)
         ? prev.filter((el) => el !== product.id)
         : [...prev, product.id]
     )
-  }
+  }, [])
 
   const addNewProduct = () => {
     setProducts((prev) => [{ id: getRandomInt(), title: newProduct }, ...prev])
@@ -73,7 +73,12 @@ const useInventory = () => {
     closeDialog()
   }
 
-  const productsInBasket = products.filter((p) => basketProducts[p.id])
+  const productsInBasket = useMemo(
+    () => products.filter((p) => basketProducts[p.id]),
+    [products, basketProducts]
+  )
+
+  // const productsInBasket = products.filter((p) => basketProducts[p.id])
 
   const totalCount = Object.values(basketProducts).reduce(
     (acc, v) => acc + v,
@@ -87,8 +92,10 @@ const useInventory = () => {
 
   const isAddButtonDisabled = !selectedProducts.length
 
-  const isBasketItemSelected = (p: Product) =>
-    !!selectedBasketKeys.find((k) => k === p.id)
+  const isBasketItemSelected = useCallback(
+    (p: Product) => !!selectedBasketKeys.find((k) => k === p.id),
+    [selectedBasketKeys]
+  )
 
   return {
     isError,
