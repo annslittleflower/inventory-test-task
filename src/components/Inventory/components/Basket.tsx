@@ -18,10 +18,6 @@ const Basket = ({
   isRemoveButtonDisabled,
   isBasketItemSelected,
 }: BasketProps) => {
-  console.log('rendered')
-
-  console.log('productsInBasket', productsInBasket)
-
   return (
     <div className='border-4 flex flex-col md:flex-[0_0_50%]'>
       <Header>
