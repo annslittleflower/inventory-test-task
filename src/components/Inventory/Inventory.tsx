@@ -31,7 +31,7 @@ const Inventory = () => {
   if (isLoading) return <div>loading...</div>
 
   return (
-    <form
+    <form // this is not needed here, just for testing stuff
       onSubmit={(e) => {
         e.preventDefault()
         console.log('submitting')
